@@ -1,0 +1,7 @@
+d <- read.table('household_power_consumption.txt', sep = ";", skip = 66636, header = F, na.strings = c("?"), nrows = 2881, stringsAsFactors = F)
+h <- read.table('household_power_consumption.txt', sep = ";", header = T, na.strings = c("?"), nrows = 1)
+names(d) <- names(h)
+d$dt <- strptime(do.call(paste, d[c(1, 2)]), "%d/%m/%Y %H:%M:%S")
+png(file = "plot2.png", height = 480, width = 480) 
+plot(d$dt, d$Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xlab = "")
+dev.off()
